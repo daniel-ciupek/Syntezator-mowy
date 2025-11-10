@@ -23,8 +23,25 @@ class TextToSpeech {
 
   }
 
-  speakText = () => {};
-  stopText = () => {};
+  speakText = () => {
+window.speechSynthesis.cancel();
+
+const text = this.textToSpeech.value;
+const msg = new SpeechSynthesisUtterance();
+msg.text = text;
+msg.voice = window.speechSynthesis.getVoices()
+.find(voice => voice.name === this.voiceSelect.value);
+msg.pitch = this.pitch.value;
+msg.rate = this.rate.value;
+msg.volume = this.volume.value;
+
+window.speechSynthesis.speak(msg);
+
+
+  };
+  stopText = () => {
+    window.speechSynthesis.cancel();
+  };
 
   getVoices = () => {
     const voices = window.speechSynthesis.getVoices();
@@ -38,10 +55,15 @@ class TextToSpeech {
       </option>`
   )
   .join("");
+
+  const polishVoice = voices.find(voice => voice.lang.includes("pl"));
+  if (polishVoice) {
+    this.voiceSelect.value = polishVoice.name;
     console.log(voices);
   }
+  }
   isLangAllowed = (langToChceck) => {
-    const allowedLanguages = ["pl", "en", "fr", "de"];
+    const allowedLanguages = ["de", "fr", "en", "pl"];
     return allowedLanguages.some(allowedLang =>
         langToChceck.lang.includes(allowedLang)
     );
