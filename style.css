@@ -11,7 +11,6 @@ body {
   align-items: center;
   min-height: 100vh;
   background: linear-gradient(to right top, yellow, red, green);
-  
 }
 
 #narrator {
@@ -41,10 +40,8 @@ h2 {
 
 #textarea::placeholder {
   color: #888;
-  font-style: italic; 
-  
+  font-style: italic;
 }
-
 
 .options {
   display: grid;
@@ -54,7 +51,8 @@ h2 {
   color: white;
 }
 
-#voice, option {
+#voice,
+option {
   font-size: 0.87rem;
   color: black;
 }
